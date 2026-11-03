@@ -1,0 +1,187 @@
+# Agile Retail – Full Stack Application
+
+A full-stack application built using TypeScript, Node.js, Express and React. The project follows a monorepo architecture with separate backend and frontend applications, alongside shared packages for reusable code and types.
+
+## Tech Stack
+
+### Backend
+- Node.js
+- TypeScript
+- Express.js
+- Prisma ORM
+- PostgreSQL
+- Zod – Request validation
+- Jest / Vitest – Testing
+- Prettier – Code formatting
+
+### Frontend
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- ShadCN UI
+- TanStack Query – Server state management
+- TanStack Router – Client-side routing
+- TanStack Table – Data tables
+
+### Development Tools
+- npm Workspaces
+- Git
+- Docker / Docker Compose
+- ESLint
+- Prettier
+
+## Project Structure
+
+```text
+AgileRetailExercise/
+│
+├── backend/
+│   ├── src/
+│   │   ├── controllers/
+│   │   ├── middleware/
+│   │   ├── routes/
+│   │   ├── services/
+│   │   ├── schemas/
+│   │   ├── lib/
+│   │   ├── app.ts
+│   │   └── server.ts
+│   ├── prisma/
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── routes/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   ├── services/
+│   │   └── main.tsx
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── packages/
+│   └── shared/
+│       ├── src/
+│       └── package.json
+│
+├── .gitignore
+├── package.json
+├── package-lock.json
+└── README.md
+```
+
+## Prerequisites
+
+Make sure you have the following installed:
+
+- Node.js (v24 or compatible project version)
+- npm
+- PostgreSQL
+
+## Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd AgileRetailExercise
+```
+
+### 2. Install dependencies
+
+Install all workspace dependencies from the project root:
+
+```bash
+npm install
+```
+
+### 3. Configure environment variables
+
+Create a `.env` file in the backend directory.
+
+Example:
+
+```env
+NODE_ENV=development
+PORT=3000
+DATABASE_URL="postgresql://user:password@localhost:5432/agile_retail"
+```
+
+Update the database connection details to match your local PostgreSQL configuration.
+
+### 4. Database setup
+
+Run Prisma migrations:
+
+```bash
+npm run db:migrate -w backend
+```
+
+Generate the Prisma client if required:
+
+```bash
+npm run db:generate -w backend
+```
+
+### 5. Start the application
+
+Start the backend:
+
+```bash
+npm run dev -w backend
+```
+
+Start the frontend in a separate terminal:
+
+```bash
+npm run dev -w frontend
+```
+
+The application will be available at:
+
+- Frontend: http://localhost:5173
+- Backend: http://localhost:3000
+
+## Available Scripts
+
+Run workspace commands from the project root.
+
+| Command | Description |
+|---|---|
+| `npm install` | Install all workspace dependencies |
+| `npm run dev -w backend` | Start backend development server |
+| `npm run dev -w frontend` | Start frontend development server |
+| `npm run build -w backend` | Build backend |
+| `npm run build -w frontend` | Build frontend |
+| `npm run format -w backend` | Format backend code |
+| `npm run format:check -w backend` | Check backend formatting |
+| `npm test -w backend` | Run backend tests |
+
+## API
+
+The backend exposes RESTful API endpoints.
+
+Base URL:
+
+```text
+http://localhost:3000/api
+```
+
+Document your implemented endpoints here as the application develops.
+
+## Development Guidelines
+
+- TypeScript is used across the application.
+- Follow a modular and maintainable project structure.
+- Validate incoming API requests.
+- Keep shared types and schemas in reusable workspace packages where appropriate.
+- Use environment variables for configuration and sensitive values.
+- Follow consistent code formatting using Prettier.
+- Write automated tests for critical application functionality.
+
+## License
+
+This project is developed as part of the Agile Retail technical assessment.
