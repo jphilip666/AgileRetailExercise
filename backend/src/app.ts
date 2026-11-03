@@ -1,15 +1,17 @@
 import express, { type Express, type Request, type Response, type NextFunction } from 'express';
-import cors from "cors";
+import cors from 'cors';
 import apiV1Routes from '@/routes/v1/test.js';
 
 const app: Express = express();
 
 // CORS Middleware
-app.use(cors({
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(
+    cors({
+        origin: 'http://localhost:5173',
+        methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+    }),
+);
 
 // JSON Middleware
 app.use(express.json());
@@ -18,7 +20,7 @@ app.use(express.json());
 app.use('/api/v1', apiV1Routes);
 
 // Health Check Route
-app.get("/health", (req: Request, res: Response) => {
+app.get('/health', (req: Request, res: Response) => {
     res.send('Server is running!');
 });
 
