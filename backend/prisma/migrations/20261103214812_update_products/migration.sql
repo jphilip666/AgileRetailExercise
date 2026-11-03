@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "products" ALTER COLUMN "stock" DROP DEFAULT,
+ALTER COLUMN "isActive" DROP DEFAULT;
