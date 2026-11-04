@@ -1,28 +1,31 @@
 import express from 'express';
-import itemController from '@/controllers/v1/productController.js';
+import productController from '@/controllers/v1/productController.js';
 import { createProductSchema, updateProductSchema, productIdSchema } from '@myapp/schemas';
 import { validateRequest } from '@/middleware/validateRequest.js';
 
 const router = express.Router();
 
 // get all items
-router.get('/', itemController.getAllProducts);
+router.get('/pagination', productController.getPaginationProducts);
+
+// get all items
+router.get('/', productController.getAllProducts);
 
 // get item
-router.get('/:id', validateRequest(productIdSchema, 'params'), itemController.getProductById);
+router.get('/:id', validateRequest(productIdSchema, 'params'), productController.getProductById);
 
 // post item
-router.post('/', validateRequest(createProductSchema, 'body'), itemController.createProduct);
+router.post('/', validateRequest(createProductSchema, 'body'), productController.createProduct);
 
 // update item
 router.put(
     '/:id',
     validateRequest(productIdSchema, 'params'),
     validateRequest(updateProductSchema, 'body'),
-    itemController.updateProductById,
+    productController.updateProductById,
 );
 
 // delete item
-router.delete('/:id', validateRequest(productIdSchema, 'params'), itemController.deleteProductById);
+router.delete('/:id', validateRequest(productIdSchema, 'params'), productController.deleteProductById);
 
 export default router;

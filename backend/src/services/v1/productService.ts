@@ -2,6 +2,56 @@ import { db } from '@/lib/prisma.js';
 import { type Product } from '@/generated/prisma/client.js';
 import { type CreateProductInput, type UpdateProductInput } from '@/types/productType.js';
 
+const getPaginationProducts = async (paginationParams: {
+    page: number,
+    limit: number,
+    skip: number,
+    sortBy: string,
+    sortOrder: string,
+    search: string
+}): Promise<{
+    products: Product[],
+    total: number,
+    totalPages: number,
+    }> => {
+    const page = paginationParams.page;
+    const limit = paginationParams.limit;
+    const skip = paginationParams.skip;
+    const sortBy: string = paginationParams.sortBy;
+    const sortOrder = paginationParams.sortOrder;
+    const search = paginationParams.search;
+
+    const where = search
+    ? {
+        OR: [
+            { name: { contains: search, mode: 'insensitive' as const } },
+            { sku: { contains: search, mode: 'insensitive' as const } },
+        ],
+    }
+    : {};
+
+    const [products, total] = await Promise.all([
+        db.product.findMany({
+            where,
+            orderBy: {
+                [sortBy]: sortOrder,
+            },
+            skip,
+            take: limit,
+        }),
+
+        db.product.count(),
+    ]);
+
+    const totalPages = Math.ceil(total / limit);
+
+    return {
+        products,
+        total,
+        totalPages,
+    }
+};
+
 const getAllProducts = async (): Promise<Product[]> => {
     const allProducts = await db.product.findMany();
     return allProducts;
@@ -55,6 +105,7 @@ const deleteProductById = async (id: string): Promise<Product> => {
 };
 
 export default {
+    getPaginationProducts,
     getAllProducts,
     getProductById,
     createProduct,

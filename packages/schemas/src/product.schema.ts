@@ -24,11 +24,13 @@ export const updateProductSchema = z.object({
     stock: productFields.stock,
     isActive: productFields.isActive,
 });
-
-export const deleteProductSchema = z.object({
-    id: productFields.id,
-});
     
 export const productIdSchema = z.object({
     id: productFields.id,
 });
+
+export type ProductIdInput = z.infer<typeof productIdSchema>;
+export type CreateProductInput = z.input<typeof createProductSchema>;
+export type CreateProductData = z.output<typeof createProductSchema>;
+export type UpdateProductInput = z.input<typeof updateProductSchema>;
+export type UpdateProductData = z.input<typeof updateProductSchema>;
