@@ -10,11 +10,8 @@ function RootComponent() {
         <React.Fragment>
             <div className="p-2 flex gap-2">
                 <Link to="/" className="[&.active]:font-bold">
-                    Home
+                    <span className="text-3xl font-medium">Agile X</span>
                 </Link>{' '}
-                <Link to="/about" className="[&.active]:font-bold">
-                    About
-                </Link>
             </div>
             <hr />
             <Outlet />

@@ -23,3 +23,7 @@ export const saveTaskAnswerSchema = z.object({
   questionId: z.string().min(1, "Question ID is required"),
   answer: z.unknown(),
 });
+
+export const storeSchema = z.object({
+  storeId: z.string().min(1, "Please select a store"),
+});

@@ -1,6 +1,6 @@
 import { db } from "../src/lib/prisma.js";
 
-async function seedTasks() {
+export async function seedTasks() {
   try {
     // Find the workflow we previously seeded
     const workflow = await db.workflow.findUnique({
@@ -27,6 +27,18 @@ async function seedTasks() {
         },
         {
           workflowId: workflow.id,
+          storeId: "store-001",
+          assignedTo: "manager-001",
+          dueDate: new Date(),
+        },
+        {
+          workflowId: workflow.id,
+          storeId: "store-001",
+          assignedTo: "manager-001",
+          dueDate: new Date(),
+        },
+        {
+          workflowId: workflow.id,
           storeId: "store-002",
           assignedTo: "manager-002",
           dueDate: new Date(),
@@ -42,5 +54,3 @@ async function seedTasks() {
     await db.$disconnect();
   }
 }
-
-seedTasks();

@@ -11,7 +11,7 @@ const __dirname = path.dirname(__filename);
 
 const workflowsDirectory = path.resolve(__dirname, "../workflows");
 
-async function seedWorkflows() {
+export async function seedWorkflows() {
   try {
     // 1. Read all JSON filenames
     const files = await readdir(workflowsDirectory);
@@ -58,5 +58,3 @@ async function seedWorkflows() {
     await db.$disconnect();
   }
 }
-
-seedWorkflows();

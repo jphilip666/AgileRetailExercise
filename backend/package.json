@@ -11,7 +11,8 @@
     "format": "prettier --write \"src/**/*.{ts,tsx,js,json}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx,js,json}\"",
     "seed_workflows": "tsx scripts/seed-workflows.ts",
-    "seed_tasks": "tsx scripts/seed-tasks.ts"
+    "seed_tasks": "tsx scripts/seed-tasks.ts",
+    "clean_init": "tsx scripts/clean-init.ts"
   },
   "author": "",
   "license": "ISC",
