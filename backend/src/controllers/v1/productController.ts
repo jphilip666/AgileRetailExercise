@@ -1,7 +1,11 @@
 import type { Request, Response, NextFunction } from 'express';
 import productService from '@/services/v1/productService.js';
 
-const getPaginationProducts = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+const getPaginationProducts = async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+): Promise<void> => {
     try {
         const page = Math.max(1, Number(req.query.page) || 1);
         const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 10));
@@ -10,13 +14,13 @@ const getPaginationProducts = async (req: Request, res: Response, next: NextFunc
         const sortOrder: string = req.query.sortOrder as string;
         const search = String(req.query.search || '').trim();
 
-        const {products, total, totalPages} = await productService.getPaginationProducts({
+        const { products, total, totalPages } = await productService.getPaginationProducts({
             page,
             limit,
             skip,
             sortBy,
             sortOrder,
-            search
+            search,
         });
 
         res.status(200).json({

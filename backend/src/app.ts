@@ -1,6 +1,7 @@
 import express, { type Express, type Request, type Response, type NextFunction } from 'express';
 import cors from 'cors';
 import apiV1ProductRoutes from '@/routes/v1/productRoutes.js';
+import apiV1TasktRoutes from '@/routes/v1/taskRoutes.js';
 
 const app: Express = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/v1/products', apiV1ProductRoutes);
+app.use('/api/v1/tasks', apiV1TasktRoutes);
 
 // Health Check Route
 app.get('/health', (req: Request, res: Response) => {

@@ -26,6 +26,10 @@ router.put(
 );
 
 // delete item
-router.delete('/:id', validateRequest(productIdSchema, 'params'), productController.deleteProductById);
+router.delete(
+    '/:id',
+    validateRequest(productIdSchema, 'params'),
+    productController.deleteProductById,
+);
 
 export default router;

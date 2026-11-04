@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "startQuestionId": "q1",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Are all tills operational?",
+      "type": "boolean",
+      "required": true,
+      "next": {
+        "yes": "q2",
+        "no": "q3"
+      }
+    },
+    {
+      "id": "q2",
+      "text": "Are all employees present?",
+      "type": "boolean",
+      "required": true,
+      "next": {
+        "yes": "q4",
+        "no": "q5"
+      }
+    },
+    {
+      "id": "q3",
+      "text": "Has technical support been contacted?",
+      "type": "boolean",
+      "required": true,
+      "next": {
+        "yes": "q2",
+        "no": "q6"
+      }
+    },
+    {
+      "id": "q4",
+      "text": "Is the shop floor clean and ready for customers?",
+      "type": "boolean",
+      "required": true,
+      "next": {
+        "yes": "q7",
+        "no": "q8"
+      }
+    },
+    {
+      "id": "q5",
+      "text": "How many employees are absent?",
+      "type": "number",
+      "required": true,
+      "next": {
+        "any": "q4"
+      }
+    },
+    {
+      "id": "q6",
+      "text": "Please explain why technical support has not been contacted.",
+      "type": "text",
+      "required": true,
+      "next": {
+        "any": "q2"
+      }
+    },
+    {
+      "id": "q7",
+      "text": "Are all promotional displays correctly set up?",
+      "type": "boolean",
+      "required": true,
+      "next": {
+        "yes": null,
+        "no": "q9"
+      }
+    },
+    {
+      "id": "q8",
+      "text": "Please describe what cleaning needs to be completed.",
+      "type": "text",
+      "required": true,
+      "next": {
+        "any": "q7"
+      }
+    },
+    {
+      "id": "q9",
+      "text": "Please describe which promotional displays need attention.",
+      "type": "text",
+      "required": true,
+      "next": {
+        "any": null
+      }
+    }
+  ]
+}

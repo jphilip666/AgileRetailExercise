@@ -24,3 +24,55 @@ model Product {
 
     @@map("products")
 }
+
+model Workflow {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  rules       Json
+  isActive    Boolean  @default(true)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tasks       Task[]
+    
+  @@map("workflows")
+}
+
+enum TaskStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
+
+model Task {
+  id          String     @id @default(uuid())
+  workflowId  String
+  storeId     String
+  assignedTo  String?
+  dueDate     DateTime
+  status      TaskStatus @default(PENDING)
+
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  workflow    Workflow   @relation(fields: [workflowId], references: [id])
+  answers     TaskAnswer[]
+
+  @@index([storeId, dueDate])
+  @@map("tasks")
+}
+
+model TaskAnswer {
+  id        String   @id @default(uuid())
+  taskId    String
+  questionId String
+  answer    Json
+  createdAt DateTime @default(now())
+
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, questionId])
+  @@map("task_answers")
+}

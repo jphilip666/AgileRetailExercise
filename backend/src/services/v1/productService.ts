@@ -3,17 +3,17 @@ import { type Product } from '@/generated/prisma/client.js';
 import { type CreateProductInput, type UpdateProductInput } from '@/types/productType.js';
 
 const getPaginationProducts = async (paginationParams: {
-    page: number,
-    limit: number,
-    skip: number,
-    sortBy: string,
-    sortOrder: string,
-    search: string
+    page: number;
+    limit: number;
+    skip: number;
+    sortBy: string;
+    sortOrder: string;
+    search: string;
 }): Promise<{
-    products: Product[],
-    total: number,
-    totalPages: number,
-    }> => {
+    products: Product[];
+    total: number;
+    totalPages: number;
+}> => {
     const page = paginationParams.page;
     const limit = paginationParams.limit;
     const skip = paginationParams.skip;
@@ -22,13 +22,13 @@ const getPaginationProducts = async (paginationParams: {
     const search = paginationParams.search;
 
     const where = search
-    ? {
-        OR: [
-            { name: { contains: search, mode: 'insensitive' as const } },
-            { sku: { contains: search, mode: 'insensitive' as const } },
-        ],
-    }
-    : {};
+        ? {
+              OR: [
+                  { name: { contains: search, mode: 'insensitive' as const } },
+                  { sku: { contains: search, mode: 'insensitive' as const } },
+              ],
+          }
+        : {};
 
     const [products, total] = await Promise.all([
         db.product.findMany({
@@ -49,7 +49,7 @@ const getPaginationProducts = async (paginationParams: {
         products,
         total,
         totalPages,
-    }
+    };
 };
 
 const getAllProducts = async (): Promise<Product[]> => {
